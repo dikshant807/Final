@@ -109,8 +109,6 @@ opacity:0;
     animation:moonGlow 4s ease-in-out infinite;
 }
 
-/* MOON GLOW */
-
 @keyframes moonGlow{
 
 0%{
@@ -145,7 +143,7 @@ box-shadow:
     animation:fadeIn 2s ease;
 }
 
-/* NOTES CONTAINER */
+/* NOTES */
 
 .container{
     width:100%;
@@ -154,8 +152,6 @@ box-shadow:
     align-items:center;
     gap:60px;
 }
-
-/* PAPER NOTE */
 
 .note{
     width:88%;
@@ -187,8 +183,6 @@ box-shadow:
     animation-fill-mode:forwards;
 }
 
-/* DIFFERENT ROTATION */
-
 .note:nth-child(odd){
     rotate:-1deg;
 }
@@ -197,13 +191,9 @@ box-shadow:
     rotate:1deg;
 }
 
-/* NOTE HOVER */
-
 .note:hover{
     transform:translateY(-10px) scale(1.02);
 }
-
-/* TAPE */
 
 .note::before{
     content:'';
@@ -222,8 +212,6 @@ box-shadow:
 
     backdrop-filter:blur(2px);
 }
-
-/* PIN */
 
 .note::after{
     content:'';
@@ -245,8 +233,6 @@ box-shadow:
     box-shadow:0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* FLOATING EFFECT */
-
 @keyframes float{
 
 0%{
@@ -263,8 +249,6 @@ translate:0 0;
 
 }
 
-/* FADE IN */
-
 @keyframes fadeIn{
 
 from{
@@ -278,8 +262,6 @@ transform:translateY(0);
 }
 
 }
-
-/* HEART */
 
 .heart{
     text-align:right;
@@ -326,13 +308,9 @@ transform:translateY(0);
     transform:translateY(40px);
 }
 
-/* PROMISE HOVER */
-
 .promise-note:hover{
     transform:translateY(-10px) scale(1.02);
 }
-
-/* GLOW */
 
 @keyframes glow{
 
@@ -356,8 +334,6 @@ box-shadow:
 
 }
 
-/* PROMISE TITLE */
-
 .promise-note h2{
 
     font-size:60px;
@@ -369,8 +345,6 @@ box-shadow:
     color:#fff0bd;
 }
 
-/* PROMISE TEXT */
-
 .promise-note p{
 
     font-size:21px;
@@ -380,8 +354,6 @@ box-shadow:
     margin-bottom:22px;
 }
 
-/* FINAL LINE */
-
 .final-line{
 
     font-size:36px !important;
@@ -390,8 +362,6 @@ box-shadow:
 
     color:#fff0bd;
 }
-
-/* END SIGN */
 
 .end{
     text-align:center;
@@ -406,34 +376,45 @@ box-shadow:
 /* MUSIC BUTTON */
 
 #music-btn{
+
     position:fixed;
     top:20px;
     right:20px;
 
-    width:52px;
-    height:52px;
+    width:58px;
+    height:58px;
 
     border:none;
     border-radius:50%;
 
-    background:rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.08);
 
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
 
-    color:white;
+    color:#fff6c7;
 
-    font-size:22px;
+    font-size:24px;
 
     cursor:pointer;
 
     z-index:999;
 
-    transition:0.3s;
+    transition:0.4s;
+
+    box-shadow:
+    0 0 15px rgba(255,240,180,0.25),
+    inset 0 0 10px rgba(255,255,255,0.08);
 }
 
 #music-btn:hover{
-    transform:scale(1.1);
-    background:rgba(255,255,255,0.2);
+
+    transform:scale(1.12) rotate(8deg);
+
+    background:rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 0 30px rgba(255,240,180,0.5),
+    inset 0 0 15px rgba(255,255,255,0.15);
 }
 
 /* MOBILE */
@@ -477,11 +458,13 @@ box-shadow:
 
 <!-- BACKGROUND MUSIC -->
 
-<audio id="bg-music" loop>
+<audio id="bg-music" autoplay loop muted>
     <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<button id="music-btn">🎵</button>
+<!-- MUSIC BUTTON -->
+
+<button id="music-btn">☾</button>
 
 <div class="stars"></div>
 
@@ -635,27 +618,35 @@ const music = document.getElementById("bg-music");
 
 const musicBtn = document.getElementById("music-btn");
 
-/* AUTOPLAY AFTER FIRST TAP */
+/* AUTO PLAY */
 
-document.body.addEventListener("click", ()=>{
+window.addEventListener("load", ()=>{
 
 music.play();
 
-},{
-once:true
+setTimeout(()=>{
+
+music.muted = false;
+
+},1000);
+
 });
+
+/* BUTTON CONTROL */
 
 musicBtn.addEventListener("click", ()=>{
 
 if(music.paused){
 
 music.play();
-musicBtn.innerHTML = "🎵";
+
+musicBtn.innerHTML = "☾";
 
 }else{
 
 music.pause();
-musicBtn.innerHTML = "🔇";
+
+musicBtn.innerHTML = "✦";
 
 }
 

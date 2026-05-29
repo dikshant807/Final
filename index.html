@@ -403,6 +403,39 @@ box-shadow:
     animation:fadeIn 2s ease;
 }
 
+/* MUSIC BUTTON */
+
+#music-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(10px);
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    z-index:999;
+
+    transition:0.3s;
+}
+
+#music-btn:hover{
+    transform:scale(1.1);
+    background:rgba(255,255,255,0.2);
+}
+
 /* MOBILE */
 
 @media(max-width:600px){
@@ -441,6 +474,14 @@ box-shadow:
 </head>
 
 <body>
+
+<!-- BACKGROUND MUSIC -->
+
+<audio id="bg-music" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button id="music-btn">🎵</button>
 
 <div class="stars"></div>
 
@@ -522,8 +563,6 @@ I just wanted you to know what you meant to me.
 <div class="heart">♡</div>
 </div>
 
-<!-- PROMISE NOTE -->
-
 <div class="promise-note fade-element">
 
 <h2>One Promise 🌙</h2>
@@ -588,6 +627,38 @@ threshold:0.2
 
 elements.forEach((el)=>{
 observer.observe(el);
+});
+
+/* MUSIC */
+
+const music = document.getElementById("bg-music");
+
+const musicBtn = document.getElementById("music-btn");
+
+/* AUTOPLAY AFTER FIRST TAP */
+
+document.body.addEventListener("click", ()=>{
+
+music.play();
+
+},{
+once:true
+});
+
+musicBtn.addEventListener("click", ()=>{
+
+if(music.paused){
+
+music.play();
+musicBtn.innerHTML = "🎵";
+
+}else{
+
+music.pause();
+musicBtn.innerHTML = "🔇";
+
+}
+
 });
 
 </script>
